@@ -3,11 +3,15 @@ const cities = require("./cities")
 const Campground = require("../models/campgroud");
 const { places, descriptors } = require("./seedHelpers");
 const campgroud = require("../models/campgroud");
+const MongoStore = require('connect-mongo');
 
-mongoose.connect("mongodb://localhost:27017/yelp-camp", {
+const dbUrl = process.env.DB_URL || "mongodb://localhost:27017/yelp-camp"
+
+mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 });
 
 const db = mongoose.connection;
